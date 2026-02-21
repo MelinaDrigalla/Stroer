@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Du bist nicht allein</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0a2342;
+      --text-soft: #4a5970;
+      --accent: #1f6feb;
+      --accent-soft: #e7f0ff;
+      --border-soft: #dde3f0;
+      --shadow-soft: 0 14px 30px rgba(8, 29, 70, 0.08);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --max-width: 1040px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 56px;
+    }
+
+    header {
+      width: 100%;
+      max-width: var(--max-width);
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    main {
+      width: 100%;
+      max-width: var(--max-width);
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Hero / Intro links */
+
+    .intro-card {
+      background: #f9fbff;
+      border-radius: var(--radius-lg);
+      padding: 28px 26px 26px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -40% -40% auto;
+      height: 200px;
+      background: radial-gradient(circle at top, rgba(31,111,235,0.3), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(30px, 4vw, 38px);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-soft);
+      margin-bottom: 22px;
+      max-width: 32rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(10,35,66,0.07);
+      background: rgba(255,255,255,0.8);
+      font-size: 12px;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .note {
+      font-size: 12px;
+      color: var(--text-soft);
+      max-width: 30rem;
+    }
+
+    /* Tipps Spalte */
+
+    .tips-section {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      padding: 22px 20px 18px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .tips-section h2 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .tips-section p {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .tips-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .tip-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 10px 10px 0;
+      border-radius: var(--radius-md);
+    }
+
+    .tip-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .tip-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .tip-text {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    /* Treffenliste */
+
+    .meetup-section-wrapper {
+      width: 100%;
+      max-width: var(--max-width);
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.3fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 880px) {
+      .meetup-section-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .meetup-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 12px;
+    }
+
+    .meetup-header h2 {
+      font-size: 20px;
+    }
+
+    .meetup-header p {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .meetup-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .meetup-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      padding: 14px 16px 12px;
+      background: #ffffff;
+      box-shadow: 0 10px 18px rgba(8, 29, 70, 0.04);
+      display: grid;
+      grid-template-columns: minmax(0,1.6fr) minmax(0,1.1fr) auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .meetup-card {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+      }
+    }
+
+    .meetup-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meetup-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .meetup-location {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .meetup-meta {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .badge-count {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      border: none;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      color: #ffffff;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(31, 111, 235, 0.26);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(31, 111, 235, 0.32);
+      background: #245fd1;
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(31, 111, 235, 0.26);
+    }
+
+    .meetup-side {
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--border-soft);
+      padding: 18px 16px;
+      background: #f8f9ff;
+      font-size: 13px;
+      color: var(--text-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .meetup-side strong {
+      color: var(--text);
+    }
+
+    footer {
+      width: 100%;
+      max-width: var(--max-width);
+      margin-top: 32px;
+      font-size: 11px;
+      color: var(--text-soft);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">Zusammen<span>finden</span></div>
+      <div class="badge">Anlaufstelle gegen Einsamkeit</div>
+    </header>
+
+    <main>
+      <!-- Linke Spalte: Intro -->
+      <section class="intro-card" aria-labelledby="intro-heading">
+        <div class="eyebrow">Du bist nicht allein</div>
+        <h1 id="intro-heading">Manchmal braucht es nur ein Gespräch.</h1>
+        <p class="subtitle">
+          Einsamkeit ist kein persönliches Versagen. Sie ist ein Signal, das zeigt, dass dir Verbindung wichtig ist.
+          Hier findest du Anregungen und Treffen mit Menschen, denen es ähnlich geht.
+        </p>
+
+        <div class="pill-row">
+          <div class="pill"><span class="pill-dot"></span>Vertrauliches Umfeld</div>
+          <div class="pill"><span class="pill-dot"></span>Offen für alle ab 18</div>
+          <div class="pill"><span class="pill-dot"></span>Kostenfreie Teilnahme</div>
+        </div>
+
+        <p class="note">
+          Diese Seite ersetzt keine Therapie. Sie kann jedoch ein erster Schritt sein, wieder in Kontakt zu kommen.
+        </p>
+      </section>
+
+      <!-- Rechte Spalte: Tipps -->
+      <section class="tips-section" aria-labelledby="tips-heading">
+        <h2 id="tips-heading">Was dir im Alltag helfen kann</h2>
+        <p>
+          Nicht jede Idee passt zu jeder Person. Suche dir einen Punkt aus, der sich gerade machbar anfühlt, und starte klein.
+        </p>
+
+        <ul class="tips-list">
+          <li class="tip-item">
+            <div class="tip-icon">1</div>
+            <div>
+              <div class="tip-title">Kontakt üben in kleinen Schritten</div>
+              <div class="tip-text">
+                Ein kurzer Gruß im Treppenhaus oder ein Satz im Supermarkt kann ein Anfang sein. Es geht nicht um perfekte Gespräche, sondern darum, überhaupt wieder in Kontakt zu kommen.
+              </div>
+            </div>
+          </li>
+
+          <li class="tip-item">
+            <div class="tip-icon">2</div>
+            <div>
+              <div class="tip-title">Struktur für den Tag schaffen</div>
+              <div class="tip-text">
+                Feste Zeiten für Aufstehen, Essen, Bewegung und eine kleine Aufgabe pro Tag geben Halt und machen es leichter, Verabredungen einzubauen.
+              </div>
+            </div>
+          </li>
+
+          <li class="tip-item">
+            <div class="tip-icon">3</div>
+            <div>
+              <div class="tip-title">Interessen teilen</div>
+              <div class="tip-text">
+                Gruppen fallen leichter, wenn du wegen eines Themas dort bist. Ob Brettspiele, Sport, Kochen oder Sprachen – gemeinsames Interesse nimmt Druck aus dem Gespräch.
+              </div>
+            </div>
+          </li>
+
+          <li class="tip-item">
+            <div class="tip-icon">4</div>
+            <div>
+              <div class="tip-title">Über Gefühle sprechen</div>
+              <div class="tip-text">
+                Wenn du dich traust, sprich mit einer vertrauten Person ehrlich darüber, wie es dir geht. Viele andere kennen ein ähnliches Gefühl, auch wenn sie nicht darüber reden.
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Treffenliste -->
+    <section class="meetup-section-wrapper" aria-labelledby="meetup-heading">
+      <div>
+        <div class="meetup-header">
+          <div>
+            <h2 id="meetup-heading">Treffen in deiner Nähe</h2>
+            <p>Hier kannst du andere kennenlernen, die sich ebenfalls mehr Verbindung wünschen.</p>
+          </div>
+        </div>
+
+        <ul class="meetup-list" id="meetupList">
+          <!-- Einträge werden per JavaScript eingefügt -->
+        </ul>
+      </div>
+
+      <aside class="meetup-side">
+        <strong>Wie funktionieren die Treffen?</strong>
+        <p>
+          Die Gruppen sind kleine Runden mit moderierter Struktur. Es geht darum, sich in Ruhe
+          auszutauschen. Du musst nichts von dir erzählen, was du nicht teilen möchtest.
+        </p>
+        <p>
+          Wenn du einen Termin anklickst, kannst du dich auf der verlinkten Seite anmelden.
+          Die Teilnahme ist unverbindlich, du kannst jederzeit wieder aussteigen.
+        </p>
+        <p>
+          Auch wenn du unsicher bist: Schon das Lesen der Angebote ist ein Schritt auf dich zu.
+        </p>
+      </aside>
+    </section>
+
+    <footer>
+      <span>Hinweis: Dieses Angebot ersetzt keine medizinische oder psychotherapeutische Behandlung.</span>
+      <span>&copy; <span id="year"></span> Zusammenfinden</span>
+    </footer>
+  </div>
+
+  <script>
+    // Beispielhafte Treffenliste – du kannst diese Daten einfach anpassen
+    const meetups = [
+      {
+        title: "Abendrunde U Bahn Linie 3",
+        location: "Hamburg, Sternschanze",
+        dateTime: "Dienstag, 19.30 Uhr",
+        count: 7,
+        link: "#"
+      },
+      {
+        title: "Spaziergang gegen Einsamkeit",
+        location: "Hamburg, Stadtpark",
+        dateTime: "Samstag, 11.00 Uhr",
+        count: 12,
+        link: "#"
+      },
+      {
+        title: "Kaffee und leise Gespräche",
+        location: "Hamburg, Neustadt",
+        dateTime: "Donnerstag, 17.00 Uhr",
+        count: 5,
+        link: "#"
+      }
+    ];
+
+    function renderMeetups() {
+      const list = document.getElementById("meetupList");
+      list.innerHTML = "";
+
+      meetups.forEach(meetup => {
+        const li = document.createElement("li");
+        li.className = "meetup-card";
+
+        li.innerHTML = `
+          <div class="meetup-main">
+            <div class="meetup-title">${meetup.title}</div>
+            <div class="meetup-location">${meetup.location}</div>
+          </div>
+
+          <div class="meetup-meta">
+            <div>${meetup.dateTime}</div>
+            <div>Bereits ${meetup.count} Personen angemeldet</div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+            <span class="badge-count">${meetup.count} dabei</span>
+            <button class="btn-primary" onclick="window.location.href='${meetup.link}'">
+              Zur Anmeldung
+            </button>
+          </div>
+        `;
+
+        list.appendChild(li);
+      });
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderMeetups();
+  </script>
+</body>
+</html>
